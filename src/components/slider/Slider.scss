@@ -1,0 +1,71 @@
+.slider {
+  display: flex;
+  flex-direction: column;
+  max-width: 530px;
+
+  &__primary-photo {
+    width: 530px;
+    height: 350px;
+    cursor: pointer;
+  }
+
+  &__carousel {
+    margin-top: 15px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    transition: 2s ease-in-out;
+
+    > img {
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+
+      &:not(:last-child) {
+        margin-right: 15px;
+      }
+    }
+
+    &:hover {
+      .slider__btn {
+        visibility: visible;
+      }
+    }
+
+    .slider__btn {
+      visibility: hidden;
+    }
+
+    &-container {
+      display: flex;
+      overflow: hidden;
+    }
+
+    &-wrapper {
+      display: flex;
+      transition: 0.2s;
+      transform: translateX(0px);
+    }
+
+    &-item {
+      height: 100px;
+      margin-right: 5px;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    background-color: white;
+    opacity: 0.6;
+    padding: 0 5px;
+    cursor: pointer;
+    z-index: 9999;
+
+    &--right {
+      right: 0;
+    }
+  }
+}

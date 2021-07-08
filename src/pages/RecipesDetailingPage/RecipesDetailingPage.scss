@@ -1,0 +1,136 @@
+.recipe-detailing {
+  @media (max-width: 1000px) {
+    flex-direction: column;
+
+    .slider {
+      margin-top: 25px;
+
+      &__primary-photo {
+        width: auto;
+        height: auto;
+      }
+
+      &__photo {
+        width: calc(100% / 2) !important;
+        height: 50px !important;
+      }
+    }
+  }
+
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 100px;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+
+    &-with-icons {
+      display: flex;
+      margin-top: 15px;
+
+      > div:not(:last-child) {
+        margin-right: 30px;
+      }
+    }
+  }
+
+  &__title {
+    font: 40px/48px Gilroy;
+  }
+
+  &__description {
+    margin-top: 15px;
+    font: 16px/24px Roboto;
+  }
+
+  &__wrapper-icons {
+    img {
+      margin-right: 10px;
+    }
+  }
+
+  &__wrapper-block-name {
+    font: 24px/28px Gilroy;
+  }
+
+  &__ingredients {
+    margin-top: 40px;
+
+    ul {
+      margin-top: 16px;
+      list-style-type: disc;
+
+      li {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  &__instructions {
+    margin-top: 32px;
+
+    ul {
+      margin-top: 16px;
+      list-style-type: disc;
+
+      li {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  &__primary-photo {
+    width: 530px;
+    height: 350px;
+  }
+
+  &__carousel {
+    margin-top: 15px;
+    display: flex;
+
+    > img {
+      width: 56px;
+      height: 56px;
+
+      &:not(:last-child) {
+        margin-right: 15px;
+      }
+    }
+  }
+}
+
+.wrapper {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.slider-container {
+  overflow: hidden;
+  background-color: pink;
+}
+
+.slider-track {
+  display: flex;
+  background-color: yellow;
+  transition: 0.2s;
+  transform: translateX(0px);
+}
+
+.slider-item {
+  height: 100px;
+}
+
+.slider-item:nth-child(3n + 1) {
+  background-color: red;
+}
+.slider-item:nth-child(3n + 2) {
+  background-color: green;
+}
+.slider-item:nth-child(3n + 3) {
+  background-color: blue;
+}
+
+.slider-buttons {
+  text-align: center;
+}

@@ -1,0 +1,29 @@
+.filter {
+  display: flex;
+
+  &__input {
+    width: 276px;
+    margin-right: 16px;
+
+    & > input {
+      border: none;
+      margin-left: 20px;
+      background-color: transparent;
+    }
+  }
+
+  &__wrapper {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border: 1px solid #dddddd;
+    border-radius: 28px;
+  }
+
+  &__additional-filter {
+    height: 56px;
+    width: 60px;
+    cursor: pointer;
+  }
+}
