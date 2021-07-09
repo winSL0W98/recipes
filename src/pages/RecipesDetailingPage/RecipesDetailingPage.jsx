@@ -1,15 +1,13 @@
 import "./RecipesDetailingPage.scss";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouteMatch } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import recipesThunk from "../../redux/thunk/reciepsThunk";
 import difficulty from "../../assets/difficultyIcon.svg";
 import Stroke from "../../assets/Stroke.svg";
 import cuisine from "../../assets/cuisineIcon.svg";
 import time from "../../assets/timeIcon.svg";
 import Slider from "../../components/slider/Slider";
-import { detailedRecipesData } from "../../mokData/recipesData";
 import { isEmpty } from "../../utils/commonUtils";
+import useRecipes from "../../hooks/useRecipes";
 
 /**
  * Страница карточки рецепта
@@ -20,15 +18,10 @@ const RecipesDetailingPage = () => {
   const {
     params: { recipesId },
   } = useRouteMatch();
+  const { detailingRecipe, getDetailedRecipe } = useRecipes();
   const [viewedRecipe, setViewedRecipe] = useState({});
   const [timeValue, setTimeValue] = useState("");
   const [kCal, setKCal] = useState("");
-
-  const dispatch = useDispatch();
-  const detailingRecipes = useSelector(
-    (state) => state.recipes
-  ).detailingRecipes;
-
   /**
    * Присвоение значений дефолтным полям
    * @param {object} recipe - Рецепт
@@ -48,20 +41,11 @@ const RecipesDetailingPage = () => {
    * Поиск и сеттер детализированного рецепта
    */
   useEffect(() => {
-    const foundViewedRecipe = detailingRecipes.find(
-      (recipe) => recipe.id === +recipesId
-    );
-
-    if (isEmpty(foundViewedRecipe)) {
-      const foundRecipe = detailedRecipesData.filter(
-        (recipe) => recipe.id === +recipesId
-      )[0];
-      dispatch(recipesThunk.addDetailingRecipe(foundRecipe));
-      setDefaultValues(foundRecipe);
-    } else {
-      setDefaultValues(foundViewedRecipe);
+    getDetailedRecipe(recipesId);
+    if (!isEmpty(detailingRecipe)) {
+      setDefaultValues(detailingRecipe);
     }
-  }, [recipesId]);
+  }, [recipesId, detailingRecipe]);
 
   return (
     <>

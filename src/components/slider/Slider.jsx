@@ -87,14 +87,13 @@ const Slider = ({ viewedRecipes }) => {
             >
               <div className="slider__carousel-wrapper" ref={sliderTrackRef}>
                 {viewedRecipes.images.map((photo) => (
-                  <div className="slider__carousel-item">
+                  <div className="slider__carousel-item" key={photo}>
                     <img
                       onClick={() => setPrimaryPhoto(photo)}
                       style={{ width: testItemWidth, height: "100px" }}
                       className="slider__photo"
                       src={photo}
                       alt={photo}
-                      key={photo}
                     />
                   </div>
                 ))}
