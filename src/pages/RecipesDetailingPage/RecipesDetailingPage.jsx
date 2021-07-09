@@ -19,7 +19,6 @@ const RecipesDetailingPage = () => {
     params: { recipesId },
   } = useRouteMatch();
   const { detailingRecipe, getDetailedRecipe } = useRecipes();
-  const [viewedRecipe, setViewedRecipe] = useState({});
   const [timeValue, setTimeValue] = useState("");
   const [kCal, setKCal] = useState("");
   /**
@@ -32,7 +31,6 @@ const RecipesDetailingPage = () => {
         ? recipe.cookTime / 60 + " " + "hours"
         : recipe.cookTime + " " + "min";
     const calcKCal = recipe && recipe.caloricity + " " + "kCal";
-    setViewedRecipe(recipe);
     setTimeValue(calcTimeValue);
     setKCal(calcKCal);
   };
@@ -49,19 +47,21 @@ const RecipesDetailingPage = () => {
 
   return (
     <>
-      {!isEmpty(viewedRecipe) && (
+      {!isEmpty(detailingRecipe) && (
         <div className="recipe-detailing">
           <div>
             <div className="recipe-detailing__info">
-              <h2 className="recipe-detailing__title">{viewedRecipe.title}</h2>
+              <h2 className="recipe-detailing__title">
+                {detailingRecipe.title}
+              </h2>
               <div className="recipe-detailing__description">
-                <span>{viewedRecipe.description}</span>
+                <span>{detailingRecipe.description}</span>
               </div>
 
               <div className="recipe-detailing__info-with-icons">
                 <div className="recipe-detailing__wrapper-icons">
                   <img src={difficulty} alt="diff" />
-                  <span>{viewedRecipe.difficulty}</span>
+                  <span>{detailingRecipe.difficulty}</span>
                 </div>
                 <div className="recipe-detailing__wrapper-icons">
                   <img src={time} alt="time" />
@@ -73,7 +73,7 @@ const RecipesDetailingPage = () => {
                 </div>
                 <div className="recipe-detailing__wrapper-icons">
                   <img src={cuisine} alt="cuisine" />
-                  <span>{viewedRecipe.cuisine.title}</span>
+                  <span>{detailingRecipe.cuisine.title}</span>
                 </div>
               </div>
               <div className="recipe-detailing__ingredients">
@@ -81,7 +81,7 @@ const RecipesDetailingPage = () => {
                   Ingredients
                 </span>
                 <ul>
-                  {viewedRecipe.ingredients.map((ingredient, index) => (
+                  {detailingRecipe.ingredients.map((ingredient, index) => (
                     <li key={index}>{ingredient}</li>
                   ))}
                 </ul>
@@ -91,14 +91,14 @@ const RecipesDetailingPage = () => {
                   Instructions
                 </span>
                 <ul>
-                  {viewedRecipe.instructions.map((ingredient, index) => (
+                  {detailingRecipe.instructions.map((ingredient, index) => (
                     <li key={index}>{ingredient}</li>
                   ))}
                 </ul>
               </div>
             </div>
           </div>
-          <Slider viewedRecipes={viewedRecipe} />
+          <Slider viewedRecipes={detailingRecipe} />
         </div>
       )}
     </>
