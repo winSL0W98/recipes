@@ -9,7 +9,7 @@ import { allRecipesDate, detailedRecipesData } from "../mokData/recipesData";
  */
 const useRecipes = () => {
   const dispatch = useDispatch();
-  const filters = useSelector((state) => state.filters).filters;
+  const filters = useSelector((state) => state.filters);
   const detailingRecipes = useSelector(
     (state) => state.recipes
   ).detailingRecipes;
@@ -22,7 +22,6 @@ const useRecipes = () => {
    * Получить все рецепты
    */
   const getAllRecipes = () => {
-    dispatch(recipesThunk.addAllRecipes(allRecipesDate));
     setAllRecipes(allRecipesDate);
   };
 
@@ -76,12 +75,27 @@ const useRecipes = () => {
     }
   };
 
+  /**
+   * Расчет время приготовления и ккал
+   * @param {object} recipe - Рецепт
+   * @returns {{kCal: *, time: *}}
+   */
+  const calcTimeAndKCal = (recipe) => {
+    const time =
+      recipe.cookTime > 60
+        ? recipe.cookTime / 60 + " " + "hours"
+        : recipe.cookTime + " " + "min";
+    const kCal = recipe.caloricity + " " + "kCal";
+    return { time, kCal };
+  };
+
   return {
     allRecipes,
     detailingRecipe,
     getAllRecipes,
     getFilteredRecipes,
     getDetailedRecipe,
+    calcTimeAndKCal,
   };
 };
 

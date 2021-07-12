@@ -9,7 +9,7 @@ import { isEmpty } from "../../utils/commonUtils";
  * Компонент стека модальных окон.
  * @return JSX.Element
  */
-function ModalStack() {
+const ModalStack = () => {
   const { component, props, closeAll } = useModal();
   const history = useHistory();
 
@@ -43,6 +43,6 @@ function ModalStack() {
       document.body
     )
   );
-}
+};
 
 export default ModalStack;

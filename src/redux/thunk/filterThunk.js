@@ -6,6 +6,7 @@ import { FILTER_ADD, FILTER_CLEAR } from "../../constants/reducersConst";
  * @returns {Function}
  */
 const filterAdd = (data) => (dispatch) => {
+  console.log(data)
   dispatch({ type: FILTER_ADD, data });
 };
 

@@ -1,6 +1,7 @@
 import "./recipeCard.scss";
 import React from "react";
 import { useHistory } from "react-router";
+import useRecipes from "../../hooks/useRecipes";
 
 /**
  * Карточка рецепта
@@ -9,13 +10,9 @@ import { useHistory } from "react-router";
  */
 const RecipeCard = ({ recipe }) => {
   const history = useHistory();
-
-  const time =
-    recipe.cookTime > 60
-      ? recipe.cookTime / 60 + " " + "hours"
-      : recipe.cookTime + " " + "min";
-  const kCal = recipe.caloricity + " " + "kCal";
-  const details = [time, kCal, recipe.cuisine.title];
+  const { calcTimeAndKCal } = useRecipes();
+  const timeAndKCal = calcTimeAndKCal(recipe);
+  const details = [timeAndKCal.time, timeAndKCal.kCal, recipe.cuisine.title];
 
   /**
    * Редирект на карточку рецепта

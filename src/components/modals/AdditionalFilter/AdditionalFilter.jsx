@@ -1,20 +1,19 @@
 import "./AdditionalFilter.scss";
 import React, { useState } from "react";
-import closeBtn from "../../assets/closeBtnIcon.svg";
+import closeBtn from "../../../assets/closeBtnIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import filterThunk from "../../redux/thunk/filterThunk";
-import useModal from "../../hooks/useModal";
+import filterThunk from "../../../redux/thunk/filterThunk";
+import useModal from "../../../hooks/useModal";
 
 /**
  * Модальное окно с расширенными фильтрами
  * @returns {JSX.Element}
- * @constructor
  */
 const AdditionalFilter = () => {
-  const [formFields, setFormFields] = useState([]);
+  const filters = useSelector((state) => state.filters);
+  const [formFields, setFormFields] = useState(filters.kitchens);
   const { closeLast } = useModal();
   const dispatch = useDispatch();
-  const filters = useSelector((state) => state.filters).filters;
   const filtersConst = ["Caribbean", "Greek", "French", "Indian", "Chinese"];
 
   /**
@@ -67,11 +66,11 @@ const AdditionalFilter = () => {
 
   return (
     <div className="additional-filter">
-      <div className="additional-filter__close" onClick={handleClear}>
+      <div className="additional-filter__close" onClick={closeLast}>
         <img src={closeBtn} alt={closeBtn} />
       </div>
       <h3 className="additional-filter__title">Фильтр</h3>
-      {filtersConst.map((kitchen) => renderKitchen(kitchen))}
+      {filtersConst.map(renderKitchen)}
       <div className="additional-filter__control-btns">
         <button
           className="additional-filter__button additional-filter__button--clear"

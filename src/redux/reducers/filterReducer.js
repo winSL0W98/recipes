@@ -1,10 +1,8 @@
 import { FILTER_ADD, FILTER_CLEAR } from "../../constants/reducersConst";
 
 const defaultState = {
-  filters: {
-    name: "",
-    kitchens: [],
-  },
+  name: "",
+  kitchens: [],
 };
 
 /** Редьюсер фильтра */
@@ -14,10 +12,7 @@ export default function FilterReducer(state = defaultState, payload) {
     case FILTER_ADD:
       return {
         ...state,
-        filters: {
-          ...state.filters,
-          ...payload.data,
-        },
+        ...payload.data,
       };
     /** Отчистка фильтров*/
     case FILTER_CLEAR:

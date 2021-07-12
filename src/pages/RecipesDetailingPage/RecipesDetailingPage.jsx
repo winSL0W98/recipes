@@ -12,38 +12,40 @@ import useRecipes from "../../hooks/useRecipes";
 /**
  * Страница карточки рецепта
  * @returns {JSX.Element}
- * @constructor
  */
 const RecipesDetailingPage = () => {
   const {
     params: { recipesId },
   } = useRouteMatch();
-  const { detailingRecipe, getDetailedRecipe } = useRecipes();
+  const { detailingRecipe, getDetailedRecipe, calcTimeAndKCal } = useRecipes();
   const [timeValue, setTimeValue] = useState("");
   const [kCal, setKCal] = useState("");
+
   /**
    * Присвоение значений дефолтным полям
    * @param {object} recipe - Рецепт
    */
   const setDefaultValues = (recipe) => {
-    const calcTimeValue =
-      recipe.cookTime > 60
-        ? recipe.cookTime / 60 + " " + "hours"
-        : recipe.cookTime + " " + "min";
-    const calcKCal = recipe && recipe.caloricity + " " + "kCal";
-    setTimeValue(calcTimeValue);
-    setKCal(calcKCal);
+    const timeAndKCal = calcTimeAndKCal(recipe);
+    setTimeValue(timeAndKCal.time);
+    setKCal(timeAndKCal.kCal);
   };
 
   /**
-   * Поиск и сеттер детализированного рецепта
+   * Поиск детализированного рецепта
    */
   useEffect(() => {
     getDetailedRecipe(recipesId);
+  }, [recipesId]);
+
+  /**
+   * Сеттер времени приготовления и ккал детализированного рецепта
+   */
+  useEffect(() => {
     if (!isEmpty(detailingRecipe)) {
       setDefaultValues(detailingRecipe);
     }
-  }, [recipesId, detailingRecipe]);
+  }, [detailingRecipe]);
 
   return (
     <>

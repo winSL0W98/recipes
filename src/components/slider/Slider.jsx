@@ -4,8 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 /**
  * Слайдер фото
  * @param viewedRecipes
- * @returns {*}
- * @constructor
+ * @returns {JSX.Element}
  */
 const Slider = ({ viewedRecipes }) => {
   /** Основное отображаемое фото */

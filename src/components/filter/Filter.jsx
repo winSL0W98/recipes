@@ -3,9 +3,9 @@ import React from "react";
 import filterVector from "../../assets/filterVector.svg";
 import searchIcon from "../../assets/searchIcon.svg";
 import useModal from "../../hooks/useModal";
-import AdditionalFilter from "../modals/AdditionalFilter";
-import { useDispatch } from "react-redux";
+import AdditionalFilter from "../modals/AdditionalFilter/AdditionalFilter";
 import filterThunk from "../../redux/thunk/filterThunk";
+import { useDispatch } from "react-redux";
 
 /**
  * Компонент фильтра на главной странице
